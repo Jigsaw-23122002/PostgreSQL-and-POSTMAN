@@ -9,25 +9,27 @@ function EditTodo({ todo }) {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [description,setDescription]=useState(todo["description"])
+  const [description, setDescription] = useState(todo["description"]);
 
-  async function UpdateDescription(e){
-    e.preventDefault()
-    setShow(false)
-    try{
-        const body={description}
-        const response=await fetch(`http://localhost:5000/todos/${todo.todo_id}`,{
-            method:"PUT",
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify(body)
-        });
-        console.log(response)
-        window.location="/"
-    }catch(err){
-        console.error(err.message)
+  async function UpdateDescription(e) {
+    e.preventDefault();
+    setShow(false);
+    try {
+      const body = { description };
+      const response = await fetch(
+        `http://localhost:5000/todos/${todo.todo_id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }
+      );
+      console.log(response);
+      window.location = "/";
+    } catch (err) {
+      console.error(err.message);
     }
   }
-  
 
   return (
     <Fragment>
@@ -40,13 +42,14 @@ function EditTodo({ todo }) {
           <Modal.Title>Edit Todo</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <input 
-          type="text" 
-          className="form-control" 
-          value={description}
-          onChange={(e)=>{
-              setDescription(e.target.value)
-          }}/>
+          <input
+            type="text"
+            className="form-control"
+            value={description}
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
+          />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
